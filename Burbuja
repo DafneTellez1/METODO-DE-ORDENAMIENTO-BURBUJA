@@ -1,0 +1,63 @@
+import time
+import tkinter as tk
+from tkinter import filedialog
+import os
+
+#Dafne Kristel Tellez Sauz
+
+def ordenamiento_burbuja(lista_de_numeros):
+    total_elementos = len(lista_de_numeros)
+    for pasada in range(total_elementos):
+        for indice in range(0, total_elementos - pasada - 1):
+            if lista_de_numeros[indice] > lista_de_numeros[indice + 1]:
+                valor_temporal = lista_de_numeros[indice]
+                lista_de_numeros[indice] = lista_de_numeros[indice + 1]
+                lista_de_numeros[indice + 1] = valor_temporal
+
+def ejecutar_programa():
+    ventana_principal = tk.Tk()
+    ventana_principal.withdraw()
+    
+    print("Selecciona tu archivo de datos en la ventana emergente...")
+    ruta_del_archivo = filedialog.askopenfilename(
+        title="Selecciona el archivo con los 50,000 datos", 
+        filetypes=[("Archivos de texto", "*.txt")]
+    )
+
+    if not ruta_del_archivo:
+        print("No seleccionaste ningún archivo. Proceso cancelado.")
+        return
+
+    try:
+        print("Leyendo datos del archivo...")
+        with open(ruta_del_archivo, 'r') as archivo_lectura:
+            lista_datos = [int(linea.strip()) for linea in archivo_lectura if linea.strip()]
+
+        tiempo_inicio = time.time() * 1000
+        print(f"Ordenando {len(lista_datos)} datos... (Este proceso toma tiempo por el método de burbuja)")
+        
+        ordenamiento_burbuja(lista_datos)
+        
+        tiempo_final = time.time() * 1000
+        duracion_total = tiempo_final - tiempo_inicio
+
+        directorio_de_carpeta = os.path.dirname(ruta_del_archivo)
+        ruta_de_salida = os.path.join(directorio_de_carpeta, 'datos_ordenados.txt')
+
+        with open(ruta_de_salida, 'w') as archivo_escritura:
+            for numero_ordenado in lista_datos:
+                archivo_escritura.write(f"{numero_ordenado}\n")
+
+        print("\n" + "="*50)
+        print("¡ORDENAMIENTO COMPLETADO!")
+        print(f"Tiempo total: {duracion_total:.2f} milisegundos")
+        print(f"El archivo ordenado se encuentra en: {ruta_de_salida}")
+        print("="*50)
+
+    except ValueError:
+        print("Error: El archivo contiene carácteres que no son números.")
+    except Exception as error_detectado:
+        print(f"Ocurrió un error inesperado: {error_detectado}")
+
+if __name__ == "__main__":
+    ejecutar_programa()
