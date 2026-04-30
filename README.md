@@ -1,5 +1,5 @@
 # METODO-DE-ORDENAMIENTO-BURBUJA
-## Analisis de complejidad
+## Análisis de complejidad
 Para este problema utilice el método de ordenamiento llamado Burbuja, ya que como su nombre lo indica, al igual que las burbujas en un vaso de refresco, suben y bajas dependiendo de su tamaño. Y aunque es un algoritmo sencillo para implementar y entender su lógica, su mayor característica es su forma cuadrática.
 El algoritmo hace comparaciones por cada elemento con los elementos de su alrededor, por eso se dice que el número de operaciones crece de forma exponencial.
 En este caso como son 50,000 elementos aleatorios, tarda en dar el resultado ya que no es el metodo más eficas para este.
